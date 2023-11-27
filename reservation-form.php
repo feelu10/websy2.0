@@ -6,6 +6,7 @@ if (!$_SESSION['login']) {
     header('Location: connection.php');
 }
 session_abort();
+
 ?>
 
 <?php include 'includes/header.php'; ?>
@@ -29,10 +30,7 @@ if (isset($_SESSION['login'])) {
 
     error_reporting(0);
     ini_set('display_errors', 0);
-    // Set the time zone to Asia/Manila (Philippines)
     date_default_timezone_set("Asia/Manila");
-    $loginlog = $_SESSION['id'];
-    $intloginlog = intval($loginlog);
     $conn = mysqli_connect("localhost", "root", "", "school");
 }
 
@@ -43,8 +41,9 @@ while ($student = mysqli_fetch_assoc($studentQuery)) {
     $students[] = $student;
 }
 
-$userQuery = mysqli_query($conn, "SELECT firstname, lastname FROM users WHERE login = '" . $_SESSION['login'] . "'");
+$userQuery = mysqli_query($conn, "SELECT id, firstname, lastname FROM users WHERE login = '" . $_SESSION['login'] . "'");
 $user = mysqli_fetch_assoc($userQuery);
+$_SESSION['id'] = $user['id'];
 $firstname = $user['firstname'];
 $lastname = $user['lastname'];
 $fullName = $firstname . ' ' . $lastname;
@@ -56,7 +55,7 @@ $fullName = $firstname . ' ' . $lastname;
 
         <div class="row justify-content-center align-items-center">
             <article class="col-sm">
-                <form method="post" id="reservationform" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                <form method="post" id="reservationform" action="submit.php">
                     <h1>Reservation</h1>
 
                     <div class="row mb-3 align-items-center">
@@ -172,6 +171,16 @@ $fullName = $firstname . ' ' . $lastname;
                                 </select>
                             </div>
                         </div>
+                        <?php
+                            if (isset($_SESSION['message'])) {
+                                echo $_SESSION['message'];
+                                unset($_SESSION['message']); // Clear the session message to avoid displaying it on subsequent page loads
+                            }
+                        ?>
+                        <!-- Add these hidden inputs inside your form -->
+                        <input type="hidden" name="selected_id" id="selectedId" value="">
+                        <input type="hidden" name="selected_type" id="selectedType" value="">
+
                         <div class="row block mb-3 my-5">
                             <button class="form-control submit" width="100%" type="submit" name="submit">BOOK</button>
                         </div>
@@ -203,53 +212,6 @@ $fullName = $firstname . ' ' . $lastname;
                 </div> <!-- /card -->
             </article>
         </div> <!-- /row -->
-
-        <?php
-        if (isset($_POST['Title']) && isset($_POST['date']) && isset($_POST['start_time']) && isset($_POST['end_time']) && isset($_POST['description'])) {
-            $Title = mysqli_real_escape_string($conn, htmlspecialchars($_POST['Title']));
-            $date = $_POST['date'];
-            $hour_d = $_POST['start_time'];
-            $hour_f = $_POST['end_time'];
-            $date_d = [$date, $hour_d];
-            $date_d = implode(" ", $date_d);
-            $date_f = [$date, $hour_f];
-            $date_f = implode(" ", $date_f);
-            $description = mysqli_real_escape_string($conn, htmlspecialchars($_POST['description']));
-            $date = date("w", strtotime($date));
-            if ($date == 0 || $date == 6) {
-                echo '<p class="red">There are no reservations on weekends, please choose another date</p>';
-                exit();
-            }
-            if ($hour_d >= $hour_f) {
-                echo '<p class="red">The slot must be at least 1 hour, or the start time must be before the end time</p>';
-                exit();
-            }
-            $test = "SELECT COUNT(*) FROM reservations WHERE debut<= '$date_d' AND '$date_d' < end OR debut< '$date_f' AND '$date_f'<=end";
-            $result = mysqli_query($conn, $test);
-
-            // Log the SQL query to the file
-            file_put_contents($logFilePath, date('Y-m-d H:i:s') . ' ' . $test . PHP_EOL, FILE_APPEND);
-
-            $reponse = mysqli_fetch_array($result);
-            $count = $reponse['COUNT(*)'];
-            if ($count == 0) {
-                $id = $_SESSION['id'];
-                $sql = "INSERT INTO reservations (Title, description, debut, end, id_users) VALUES ('$Title', '$description', '$date_d', '$date_f', $id)";
-
-                // Log the SQL query to the file
-                file_put_contents($logFilePath, date('Y-m-d H:i:s') . ' ' . $sql . PHP_EOL, FILE_APPEND);
-
-                $result = mysqli_query($conn, $sql);
-                if ($result) {
-                    echo '<h3 class="green lead">Reservation made</h3>';
-                } else {
-                    echo '<h3 class="red lead">Error</h3>';
-                }
-            } else {
-                echo '<p class="red lead">Slot already taken</p>';
-            }
-        }
-        ?>
     </div> 
 </main> 
 
@@ -270,7 +232,6 @@ $fullName = $firstname . ' ' . $lastname;
 
                     // Update modal content with venue information
                     $('#venueModalBody').html(response);
-
                     // Show the modal
                     $('#venueModal').modal('show');
                     updateSelectedImage(response);
@@ -287,7 +248,6 @@ $fullName = $firstname . ' ' . $lastname;
                 success: function (response) {
                     // Update modal content with room information
                     $('#roomModalBody').html(response);
-
                     // Show the modal
                     $('#roomModal').modal('show');
                     updateSelectedImage(response);
@@ -313,12 +273,14 @@ $fullName = $firstname . ' ' . $lastname;
         // Attach an event listener to handle room selection
         $('#roomDropdown').change(function () {
             var selectedRoomId = $(this).val();
+            $('#selectedId').val(selectedRoomId);
             handleRoomSelection(selectedRoomId);
         });
 
         // Attach an event listener to handle venue selection
         $('#venueDropdown').change(function () {
             var venueId = $(this).val();
+            $('#selectedId').val(venueId);
             handleVenueSelection(venueId);
         });
 

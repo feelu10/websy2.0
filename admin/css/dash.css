@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .sidenav {
+    height: 100%;
+    width: 250px;
+    min-width: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    color: #fff;
+    padding-top: 20px;
+    transition: width 0.3s ease;
+  }
+
+  .sidenav ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidenav li {
+    padding: 10px 20px;
+  }
+
+  .sidenav li a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+  }
+
+  .sidenav li i {
+    margin-right: 10px;
+  }
+
+  .main {
+    margin: auto;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+    width: auto;
+  }
+
+  .toggle-btn {
+    position: absolute;
+    top: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    right: 10px;
+  }
+
+  .sidenav-minimized ul {
+    display: none;
+  }
+
+  /* Hover effect for navigation items */
+  .sidenav li a:hover {
+    background-color: #444;
+  }
+
+  /* Active link indication */
+  .sidenav li.active a {
+    background-color: #555;
+  }

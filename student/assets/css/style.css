@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Example background color */
+}
+
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #388E3C; /* Updated color */
+    color: #fff;
+    padding-top: 20px;
+    transition: width 0.5s ease;
+}
+
+.sidenav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidenav li {
+    padding: 15px 20px; /* Increased padding for better spacing */
+}
+
+.sidenav li a {
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    font-size: 1.1em; /* Slightly larger font size */
+}
+
+  .sidenav li i {
+    margin-right: 10px;
+  }
+
+  .main {
+    margin: auto;
+    padding: 20px;
+    transition: margin-left 0.5s ease;
+    width: auto;
+}
+
+/* Example Media Query for Smaller Screens */
+@media screen and (max-width: 768px) {
+    .main {
+        margin-left: 0;
+    }
+}
+
+  .toggle-btn {
+    position: absolute;
+    top: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    right: 10px;
+  }
+
+  .sidenav-minimized ul {
+    display: none; /* Adjust as per the functionality */
+}
+
+
+  /* Hover effect for navigation items */
+  .sidenav li a:hover {
+    background-color: #34495e; /* Slightly lighter on hover */
+}
+
+/* Active link indication */
+.sidenav li.active a {
+    background-color: #555;
+}

@@ -37,8 +37,8 @@ $hideZCS = in_array($currentPage, $excludedPages);
     <h4 style="margin-left:2rem">Dashboard</h4>
       <li><a href="dashboard.php?faculty=planning" onclick="setActive(this)"><i class="fas fa-calendar"></i>Calendar</a></li>
       <li><a href="dashboard.php?faculty=reservation-form" onclick="setActive(this)"><i class="fas fa-plus"></i> Make Reservation</a></li>
-      <li><a href="dashboard.php?faculty=view" onclick="setActive(this)"><i class="fas fa-book"></i>Requested reservation</a></li>
-      <li><a href="dashboard.php?faculty=setting" onclick="setActive(this)"><i class="fas fa-eye"></i>Overview</a></li>
+      <li><a href="dashboard.php?faculty=reservation" onclick="setActive(this)"><i class="fas fa-book"></i>Requested reservation</a></li>
+      <li><a href="dashboard.php?faculty=all_reservation" onclick="setActive(this)"><i class="fas fa-eye"></i>Overview</a></li>
       <li><a href="dashboard.php?faculty=profiles" onclick="setActive(this)"><i class="fas fa-user-circle"></i>Profiles</a></li>
       <div class="logout-container" style="position: absolute; right: 70px; bottom: 20px; width: 100%;">
         <a href="../logout.php" class="logout-link" style="text-align: center; display: block; padding: 10px; color: white;">
@@ -71,11 +71,11 @@ $hideZCS = in_array($currentPage, $excludedPages);
               case 'reservation-form':
                 include('student_reservation.php');
                 break;
-              case 'view':
-                include('view.php');
+              case 'reservation':
+                include('reservation.php');
                 break;
-              case 'setting':
-                include('setting.php');
+              case 'all_reservation':
+                include('all_reservation.php');
                 break;
               case 'profiles':
                 include('../profil.php');

@@ -34,7 +34,7 @@ if (isset($_SESSION['login'])) {
     $conn = mysqli_connect("localhost", "root", "", "school");
 }
 
-$studentQuery = mysqli_query($conn, "SELECT * FROM users WHERE role = 'student' AND status = 'naavailable'");
+$studentQuery = mysqli_query($conn, "SELECT * FROM users WHERE role = 'student' AND status = 'available'");
 $students = array();
 
 while ($student = mysqli_fetch_assoc($studentQuery)) {

@@ -1,5 +1,6 @@
 <!--PROFIL PAGE-->
-
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/dbconnect.php'; ?> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">    
@@ -13,14 +14,45 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,700,800" rel="stylesheet">
     <script src="https://kit.fontawesome.com/12c357b92c.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!--TITLE-->
-<?php include 'includes/dbconnect.php'; ?> 
+    <style>
+    .toggle-button {
+        background-color: #4CAF50; 
+        color: white;
+        border: none;
+        padding: 10px 20px; 
+        text-align: center; 
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px; 
+        float: right; 
+    }
 
-<?php
+    .container {
+        margin-top: 20px; 
+    }
+    </style>
+    <!--TITLE-->
+    <?php
     $login = $_SESSION['login'];
     $password = $_SESSION['password']; 
-?>
 
+    // Assuming you have a database connection
+    include 'includes/dbconnect.php'; 
+
+    // Fetch user data based on login
+    $query = "SELECT * FROM users WHERE login = ?";
+    
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('s', $login); // 's' indicates a string type
+    $stmt->execute();
+    
+    $result = $stmt->get_result();
+    $userData = $result->fetch_assoc();
+
+?>
 <section class="container my-5">
     <main class="col">
         <h1>Profile</h1>
@@ -28,11 +60,26 @@
 
             <!-- Article gauche -->
             <div class="col-sm bg-light align-items-end align-content-strech p-3 m-3">
-                
+                    <?php
+                    // Assume you have a variable $userRole that stores the user's role
+                    $userRole = $_SESSION['role']; // Adjust this based on your session variable
+
+                    if (!empty($userData) && $userRole === 'student'):
+                    ?>
+                        <div class="container">
+                            <form id="statusForm" method="post" action="update_status.php">
+                                <input type="hidden" name="userId" value="<?php echo $login; ?>">
+                                <input type="hidden" name="currentStatus" value="<?php echo $userData['status']; ?>">
+                                <button type="submit" class="toggle-button">
+                                    <?php echo ($userData['status'] == 'available') ? 'Make Unavailable' : 'Make Available'; ?>
+                                </button>
+                            </form>
+                        </div>
+                    <?php else: ?>
+                    <?php endif; ?>
                 <form action="" method="post">
-                    <div class="row mb-3 ">                
+                    <div class="row mb-3">                
                         <h3 class="form_title center">My account</h3>
-                        <i class="bi bi-person-circle"></i>
                     </div>
                     <div class="row my-3">
                         <label for="login" class="form-label">Login</label>
@@ -150,4 +197,4 @@
     <main>
 </section> <!--end container-->
 
-<?php include '../includes/footer.php';?>
+<?php include 'includes/footer.php';?>

@@ -39,7 +39,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link fas fa-calendar" href="planning.php">Calendar</a>
+                            <a class="nav-link calendar" href="planning.php">Calendar</a>
                         </li>
                         <?php if (!isset($_SESSION['login'])) : ?>
 
@@ -49,11 +49,11 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
-                                    Login/Register
+                                    Sign In | Sign Up
                                 </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <li><a class="dropdown-item" href="connection.php">Login<i class="fas fa-sign-in-alt pl-1"></i></a></li>
-                                        <li><a class="dropdown-item" href="registration.php">Register<i class="fas fa-user-plus pl-1"></i></a></li>
+                                        <li><a class="dropdown-item" href="connection.php">Log In<i class="fas fa-sign-in-alt pl-1"></i></a></li>
+                                        <li><a class="dropdown-item" href="registration.php">Sign Up<i class="fas fa-user-plus pl-1"></i></a></li>
                                     </ul>
                             </li>
                         </ul>

@@ -320,7 +320,7 @@ $fullName = $firstname . ' ' . $lastname;
             var cleanedImageSource = imageSource.replace(/<!--[\s\S]*?-->/g, '');
 
             // Set the cleaned image source to the selectedImage
-            $('#selectedImage').attr('src', cleanedImageSource);
+            $('#selectedImage').attr('src', cleanedImageSource));
         }
     });
 </script>

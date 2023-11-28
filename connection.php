@@ -25,19 +25,10 @@ if (isset($_POST['submit'])) {
 ?>
 
 <main role="main" class="container py-5"> 
-    <div class="row">
-        <div class="col-6 mx-auto py-3 bg-light"> 
-            <ul class="list-group">
-                <li class="list-group-item"><img src="img/room4.jpg" class="img-fluid border-white-5" alt="Responsive image"></li>
-                <li class="list-group-item">Once connected, you will be able to reserve, view your reservations, modify your profile, etc.</li>
-                </li>
-            </ul>
-        </div>
-
         <div class="col-6 mx-auto py-3 bg-light"> 
 
             <form action="verification.php" method="POST">
-                <h1>LOGIN</h1>
+                <h1>Login</h1>
 
                 <?php if (isset($alert)) : ?>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -57,8 +48,8 @@ if (isset($_POST['submit'])) {
                 </div>
                 
                 <div class="col pb-3">
-                    <input class="form-control submit" type="submit" id='submit' value='SUBMIT' >
-                    <p>You don't have an account yet? <a href="registration.php">Register</a></p>
+                    <input class="form-control submit" type="submit" id='submit' value='Log In'  style="margin-bottom: 5px;">
+                    <p>You don't have an account yet? <a href="registration.php">Sign up</a></p>
                 </div>
                 <?php
 

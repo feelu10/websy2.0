@@ -1,22 +1,35 @@
 <?php
-/*
+// Start session and check user authentication
 session_start();
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'guest') {
-    header("Location: some_error_page.php", true, 303); // Redirect with proper HTTP status
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'user') {
+    header("Location: some_error_page.php", true, 303);
     $_SESSION['message'] = "You can't access this page!";
     $_SESSION['message_type'] = "error";
     exit();
 }
-*/
+
+// Database connection
+include '../includes/dbconnect.php';
+
+// Assuming you have user's login in session
+$login = $_SESSION['login'];
+
+// Fetch user data based on login
+$query = "SELECT * FROM users WHERE login = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('s', $login);
+$stmt->execute();
+$result = $stmt->get_result();
+$userData = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+    <link rel="stylesheet" src="../css/style_outsiders.css">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Meta tags, Bootstrap, CSS, Fonts -->
     <title>User Profile</title>
-    <link rel="stylesheet" href="admin/css/style_outsiders.css">
+    <!-- Add your stylesheet link here -->
 </head>
 <body>
 <div class="profile-container">

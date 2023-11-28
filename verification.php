@@ -44,7 +44,7 @@
                                 header('Location: admin/dashboard.php');
                                 break;
                             case 'user':
-                                header('Location: planning.php');
+                                header('Location: guest/outsiders.php');
                                 break;
                             case 'student':
                                 header('Location: student/dashboard.php');

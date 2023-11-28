@@ -1,0 +1,177 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    background-image: linear-gradient(to bottom right, rgb(158, 243, 158), rgb(231, 231, 164));
+    color: #333;
+    padding: 20px;
+    margin: 0;
+    height: 100vh; /* Ensures the body takes the full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.profile-container {
+    background-color: #fff; /* Removed, replaced by gradient */
+    background-image: linear-gradient(to right, rgb(158, 243, 158), rgb(231, 231, 164)); 
+    max-width: 400px; /* Increased width for more space */
+    width: 90%; /* Responsive to screen size */
+    margin: 40px auto; /* Increased margin for top and bottom */
+    padding: 60px; /* More padding for a spacious interior */
+    border-radius: 20px; /* Slightly larger border radius */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Deeper shadow for more depth */
+    text-align: center;
+}
+
+.profile-photo {
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Space between photo and button */
+}
+
+.profile-photo img {
+    width: 150px; /* Increase the photo size */
+    height: 150px; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensures the image covers the area */
+    border-radius: 50%; /* Circular shape */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* More pronounced shadow for the photo */
+}
+
+.user-info {
+    text-align: center;
+    margin-top: 30px; /* Increased margin for more space */
+}
+
+.user-info h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status {
+    margin: 20px 0;
+}
+
+.status select, .status button {
+    padding: 10px 15px; /* Increased padding for better interaction */
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    margin-right: 10px;
+}
+
+.status button {
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.status button:hover {
+    background-color: #0056b3;
+}
+
+.user-links {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.user-links li {
+    margin: 15px 0; /* Increased margin for spacing */
+}
+
+.user-links a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.user-links a:hover {
+    text-decoration: underline;
+}
+
+#userStatus {
+    font-style: italic;
+}
+
+.status-indicator {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
+.status-active {
+    background-color: green;
+}
+
+.status-idle {
+    background-color: yellow;
+}
+
+.status-invisible {
+    background-color: grey;
+}
+
+.upload-note {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.remove-photo-button {
+    display: none; /* Initially hidden, shown via JS */
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #f44336;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 20px auto; /* Centered horizontally */
+    display: inline-block;
+}
+
+.remove-photo-button:hover {
+    background-color: #d32f2f;
+}
+
+.image-container {
+    text-align: center; /* Center content */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 150px; /* Set a fixed height */
+}
+
+.hidden {
+    display: none; /* Hide by default */
+}
+
+.alt-text-visible {
+    display: block; /* Show when image fails to load */
+}
+
+.profile-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Set a fixed height if needed, or manage it according to your layout requirements */
+    height: 150px;
+}
+
+.hidden {
+    display: none;
+}

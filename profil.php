@@ -27,7 +27,6 @@
         margin: 4px 2px;
         cursor: pointer;
         border-radius: 4px; 
-        float: right; 
     }
 
     .container {

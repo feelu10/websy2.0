@@ -33,7 +33,7 @@
                     An error has occurred: </p>".mysqli_error($conn);
                 } else {
                     $view = 0;
-                    header("refresh:2; url:connection.php"); 
+                    header("refresh:2; url=connection.php"); 
                 }
             }
             mysqli_close($conn); 

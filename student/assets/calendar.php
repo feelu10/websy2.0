@@ -110,7 +110,7 @@
                     $r++;
                 }
                 if ($stopitnow == false && $stopnope == false) {
-                    echo "<td id='dispo'><a href='reservation-form.php'>Free</a></td>";
+                    echo "<td id='dispo'><a href='dashboard.php?faculty=reservation-form'>Free</a></td>";
                     if ($dayCases == 5) {
                         echo "<td id='closed'>closed</td>";
                         $dayCases++;
